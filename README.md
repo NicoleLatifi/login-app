@@ -1,0 +1,1 @@
+Simple app to test out using FusionAuth on a Login/Logout button.

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const {FusionAuthClient} = require('@fusionauth/typescript-client');
-const clientId = 'ab689718-099c-4be1-87fd-2399168663aa';
-const clientSecret = '8kPeTz0Yrj7CI6ib365xjwjWwJCNxIsmT1nyW1Z3x8w';
+const clientId = '39840e66-7790-454a-85d8-8735ddcca269';
+const clientSecret = 'GekK_2hhqpSEXKLF57w5dKjfLBOutBLsvddOsFK1HWY';
 const client = new FusionAuthClient('noapikeyneeded', 'http://localhost:9011');
 const pkceChallenge = require('pkce-challenge');
 
@@ -28,6 +28,14 @@ router.get('/oauth-redirect', function (req, res, next) {
     res.redirect(302, '/');
     return;
   }
+
+router.get('/logout', (req, res) => {
+  // delete the session
+  req.session.destroy();
+
+  // end FusionAuth session
+  res.redirect(302, '/');
+});
 
   // This code stores the user in a server-side session
  client.exchangeOAuthCodeForAccessTokenUsingPKCE(req.query.code,
